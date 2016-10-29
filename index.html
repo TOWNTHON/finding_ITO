@@ -4,19 +4,23 @@
     <meta charset="utf-8">
     <title>Hello, World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
-　   <audio id="click-sound" src="audio/click.ogg"></audio>
-<script src="https://rawgit.com/aframevr/aframe/917c06889ee1f3f79b7b1bbd9eab9815f9512503/dist/aframe.min.js"></script>
-<script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
-<script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
-<script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
-<script src="https://npmcdn.com/aframe-template-component@3.0.1"></script>
+    <script src="https://rawgit.com/aframevr/aframe/917c06889ee1f3f79b7b1bbd9eab9815f9512503/dist/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.0.1"></script>
     <script src="set-image.js"></script>
     <script src="update-raycaster.js"></script>
   </head>
   <body>
     <a-scene>
       <a-assets>
-        <img id="kusatsu" crossorigin="anonymous" src="images/kusatsu_6.jpg">
+        <img id="kusatsu1" crossorigin="anonymous" src="images/kusatsu_1.jpg">
+        <img id="kusatsu2" crossorigin="anonymous" src="images/kusatsu_2.jpg">
+        <img id="kusatsu3" crossorigin="anonymous" src="images/kusatsu_3.jpg">
+        <img id="kusatsu4" crossorigin="anonymous" src="images/kusatsu_4.jpg">
+        <img id="kusatsu5" crossorigin="anonymous" src="images/kusatsu_5.jpg">
+        <img id="kusatsu6" crossorigin="anonymous" src="images/kusatsu_6.jpg">
         <img id="joboob1" crossorigin="anonymous" src="images/joboob1.png">
         <img id="message" crossorigin="anonymous" src="images/message.png">
         <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
@@ -33,27 +37,19 @@
             sound="on: click; src: #click-sound"
             update-raycaster="#cursor"></a-plane>
         </script>
+
       </a-assets>
 
 
-      <a-sky id="kusatsu-sky" src="#kusatsu"></a-sky>
+      <a-sky id="kusatsu-sky" src="#kusatsu1"></a-sky>
 
       <!-- Image links. -->
-      <a-entity id="links" >
-        <a-entity template="src: #link" position="1 1 -5" data-src="#joboob1" data-thumb="#joboob1"></a-entity>
-        <a-entity template="src: #link" position="3 1 -1" data-src="#message" data-thumb="#message"></a-entity>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+        <a-entity template="src: #link"  data-src="#kusatsu4" data-thumb="#joboob1"></a-entity>
+        <a-entity template="src: #link"  data-src="#kusatsu6" data-thumb="#message"></a-entity>
       </a-entity>
 
-      <a-plane class="link" height="1" width="1"
-      　　　　　material="shader: flat; src: #message"
-      　　　　　sound="on: click; src: #click-sound"></a-plane>
 
-<!--
-      <a-image src="joboob1.png" position="-2 5 -2" color="#ffffff">
-      　　　<a-animation attribute="rotation" dur="4000" to="-360 -360 -360" repeat="indefinite" direction="normal">
-          </a-animation>
-      </a-image>
--->
 
       <!-- Camera + cursor. -->
       <a-entity camera look-controls>
