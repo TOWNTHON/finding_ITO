@@ -2,6 +2,10 @@
   "name": "aframe-hello-world-boilerplate",
   "description": "Boilerplate with A-Frame's 'Hello, World!' of WebVR.",
   "version": "0.3.0",
+  "engines": {
+    "node": "v7.0.X",
+    "npm": "3.10.X"
+  },
   "license": "MIT",
   "scripts": {
     "start": "budo --live --verbose --port 3000 --open",
@@ -11,6 +15,10 @@
   "devDependencies": {
     "budo": "^7.0.0",
     "ghpages": "0.0.3"
+  },
+  "dependencies": {
+    "budo": "^7.0.0",
+    "ghpages": "0.0.3"   
   },
   "keywords": [
     "aframe",
