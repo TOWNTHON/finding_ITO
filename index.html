@@ -46,10 +46,10 @@
       <a-sky id="kusatsu-sky" src="#kusatsu1"></a-sky>
 
       <!-- Image links. -->
-      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+      <a-entity id="link" layout="type: line; margin: 1.5" position="0 -1 -4">
         <a-entity template="src: #link"  data-src="#kusatsu4" data-thumb="#joboob1"></a-entity>
         <a-entity template="src: #link"  data-src="#kusatsu6" data-thumb="#message"></a-entity>
-        <a-entity template="src: #link" obj-model="obj: #joboob-obj; mtl: #joboob-mtl" position="150 0 0" rotation="0 135 0" scale="1 1 1"></a-entity>
+        <a-entity template="src: #link" obj-model="obj: #joboob-obj; mtl: #joboob-mtl" position="150 0 0" rotation="0 135 0" opacity="0 0 0" scale="1 1 1"></a-entity>
       </a-entity>
 
       <!-- Camera + cursor. -->
@@ -60,7 +60,26 @@
           event-set__1="_event: mouseenter; color: springgreen"
           event-set__2="_event: mouseleave; color: black"
           raycaster="objects: .link"></a-cursor>
+        <a-animation
+          begin="click"
+          attribute="rotation"
+          dur="5000"
+          to="0 180 0">
+        </a-animation>
       </a-entity>
+        <!-- カメラ -->
+      <a-camera>
+    <!-- カーソル -->
+    <a-entity cursor="fuse: true; fuseTimeout: 1000">
+      <!-- リング -->
+      <a-ring
+        color="#e74c3c"
+        radius-inner="0.01"
+        radius-outer="0.015"
+        position="0 0 -0.75"></a-ring>
+    </a-entity>
+  </a-camera>
+
 
     </a-scene>
   </body>
