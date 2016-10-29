@@ -4,15 +4,67 @@
     <meta charset="utf-8">
     <title>Hello, World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
-    <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+　   <audio id="click-sound" src="audio/click.ogg"></audio>
+<script src="https://rawgit.com/aframevr/aframe/917c06889ee1f3f79b7b1bbd9eab9815f9512503/dist/aframe.min.js"></script>
+<script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+<script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+<script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+<script src="https://npmcdn.com/aframe-template-component@3.0.1"></script>
+    <script src="set-image.js"></script>
+    <script src="update-raycaster.js"></script>
   </head>
   <body>
     <a-scene>
-      <a-sky src="images/kusatsu.jpg"></a-sky>
-      <a-image src="images/joboob1.png" position="-2 5 -2" color="#ffffff">
+      <a-assets>
+        <img id="kusatsu" crossorigin="anonymous" src="images/kusatsu_6.jpg">
+        <img id="joboob1" crossorigin="anonymous" src="images/joboob1.png">
+        <img id="message" crossorigin="anonymous" src="images/message.png">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+
+        <!-- Image link template to be reused. -->
+        <script id="link" type="text/nunjucks">
+          <a-plane class="link" height="1" width="1"
+            material="shader: flat; src: {{ thumb }}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #kusatsu-sky; src: {{ src }}"
+            sound="on: click; src: #click-sound"
+            update-raycaster="#cursor"></a-plane>
+        </script>
+      </a-assets>
+
+
+      <a-sky id="kusatsu-sky" src="#kusatsu"></a-sky>
+
+      <!-- Image links. -->
+      <a-entity id="links" >
+        <a-entity template="src: #link" position="1 1 -5" data-src="#joboob1" data-thumb="#joboob1"></a-entity>
+        <a-entity template="src: #link" position="3 1 -1" data-src="#message" data-thumb="#message"></a-entity>
+      </a-entity>
+
+      <a-plane class="link" height="1" width="1"
+      　　　　　material="shader: flat; src: #message"
+      　　　　　sound="on: click; src: #click-sound"></a-plane>
+
+<!--
+      <a-image src="joboob1.png" position="-2 5 -2" color="#ffffff">
       　　　<a-animation attribute="rotation" dur="4000" to="-360 -360 -360" repeat="indefinite" direction="normal">
-      　　　</a-animation>
+          </a-animation>
       </a-image>
+-->
+
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+
     </a-scene>
   </body>
 </html>
