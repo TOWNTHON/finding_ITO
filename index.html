@@ -21,8 +21,10 @@
         <img id="kusatsu4" crossorigin="anonymous" src="images/kusatsu_4.jpg">
         <img id="kusatsu5" crossorigin="anonymous" src="images/kusatsu_5.jpg">
         <img id="kusatsu6" crossorigin="anonymous" src="images/kusatsu_6.jpg">
-        <img id="joboob1" crossorigin="anonymous" src="images/joboob1.png">
-        <img id="message" crossorigin="anonymous" src="images/message.png">
+        <!--質問-->
+        <img id="message" crossorigin="anonymous" src="images/question1.jpg" height="150" width="300">
+        <img id="answer1y" crossorigin="anonymous" src="images/answer1y.jpg" height="150" width="300">
+        <img id="answer1n" crossorigin="anonymous" src="images/answer1n.jpg" height="150" width="300">
         <!--ジョブーブの3D画像--> 
         <a-asset-item id="joboob-obj" src="obj/joboob3d.obj"></a-asset-item>
         <a-asset-item id="joboob-mtl" src="obj/joboob3d.mtl"></a-asset-item>
@@ -47,8 +49,9 @@
 
       <!-- Image links. -->
       <a-entity id="link" layout="type: line; margin: 1.5" position="0 -1 -4">
-        <a-entity template="src: #link"  data-src="#kusatsu4" data-thumb="#joboob1"></a-entity>
         <a-entity template="src: #link"  data-src="#kusatsu6" data-thumb="#message"></a-entity>
+        <a-entity template="src: #link"  data-src="#kusatsu6" data-thumb="#answer1y"></a-entity>
+        <a-entity template="src: #link"  data-src="#kusatsu6" data-thumb="#answer1n"></a-entity>
         <a-entity template="src: #link" obj-model="obj: #joboob-obj; mtl: #joboob-mtl" position="150 0 0" rotation="0 135 0" opacity="0 0 0" scale="1 1 1"></a-entity>
       </a-entity>
 
@@ -76,15 +79,19 @@
         color="#e74c3c"
         radius-inner="0.01"
         radius-outer="0.015"
-        position="0 0 -0.75"></a-ring>
+        position="0 0 -0.75">
+      </a-ring>
     </a-entity>
-  </a-camera>
-
-
+      </a-camera>
     </a-scene>
     <script>
-      var elementId = document.queryselector('#joboob-obj');
-      alert("elementId");
+      var joboob3dEl = document.queryselector('#joboob-obj').object3D;
+      console.log(joboob3dEl.parent);
+      console.log(joboob3dEl.children);
+    </script>
+
+    <script>
+
     </script>
   </body>
 </html>
