@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cursor</title>
-    <meta name="description" content="Cursor - A-Frame">
+    <title>ジョブーブの草津旅行</title>
+    <meta name="description" content="ジョブーブの草津旅行">
     <script src="dist/aframe.min.js"></script>
     <script src="dist/aframe-text-component.min.js"></script>
     <script src="font/myfont.typeface.js"></script>
@@ -14,7 +14,6 @@
       <a-assets>
         <img id="kusatsu0" crossorigin="anonymous" src="images/kusatsu_retake_00.jpg">
         <img id="kusatsu1" crossorigin="anonymous" src="images/kusatsu_retake_01.jpg">
-        <img id="kusatsu2" crossorigin="anonymous" src="images/kusatsu_retake_02.jpg">
         <img id="kusatsu3" crossorigin="anonymous" src="images/kusatsu_retake_03.jpg">
         <img id="kusatsu4" crossorigin="anonymous" src="images/kusatsu_retake_04.jpg">
         <img id="kusatsu5" crossorigin="anonymous" src="images/kusatsu_retake_05.jpg">
@@ -25,13 +24,12 @@
         <img id="answer1y" crossorigin="anonymous" src="images/answer1y.jpg" height="150" width="300">
         <img id="answer1n" crossorigin="anonymous" src="images/answer1n.jpg" height="150" width="300">
         <!--ジョブーブの3D画像-->
-        <a-asset-item id="cow-obj" src="obj/Songoku.obj"></a-asset-item>
-        <a-asset-item id="cow-mtl" src="obj/Songoku.mtl"></a-asset-item>
+        <a-asset-item id="cow-obj" src="obj/joboob3d.obj"></a-asset-item>
+        <a-asset-item id="cow-mtl" src="obj/joboob3d.mtl"></a-asset-item>
 
 
         <audio id="blip1" src="blip1.wav"></audio>
         <audio id="blip2" src="blip2.wav"></audio>
-        <audio id="shot" src="shot.ogg"></audio>
         <a-mixin id="cube" geometry="primitive: box"></a-mixin>
         <a-mixin id="cube-hovered" material="color: #CC435F"></a-mixin>
         <a-mixin id="cube-selected" material="color: #876A96"></a-mixin>
@@ -184,7 +182,7 @@
 
           var element = document.getElementById("kusatsu-sky");
           var src = element.getAttribute("src");
-alert(element.getAttribute("src"));
+
 //          if(element.src == "#kusatsu0";){
 
 //          }
