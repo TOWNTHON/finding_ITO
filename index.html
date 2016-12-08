@@ -58,8 +58,8 @@
 
       <!-- 質問　-->
       <a-entity position="-3 4 0">
-        <a-entity position="0 0.4 0" mixin="font" text="text: くさつおんせんについたブー。; font: 07YasashisaGothic; size: 0.2;"></a-entity>
-        <a-entity position="0 0 0" mixin="font" text="text: さっそくかんこうする？; font: 07YasashisaGothic; size: 0.2;"></a-entity>
+        <a-entity id="qtext1" position="0 0.4 0" mixin="font" text="text: くさつおんせんについたブー。; font: 07YasashisaGothic; size: 0.2;"></a-entity>
+        <a-entity id="qtext2" position="0 0 0" mixin="font" text="text: さっそくかんこうする？; font: 07YasashisaGothic; size: 0.2;"></a-entity>
 
         <a-entity id="invisibleCube"
                   mixin="cube"
@@ -88,7 +88,7 @@
       <!-- 「いいえ」回答ボックス　-->
       <a-entity position="1.5 1 0">
         <a-entity mixin="font" position="-0.6 0 1" text="text: いいえ; font: 07YasashisaGothic; size: 0.18"></a-entity>
-        <a-entity id="foregroundCube"
+        <a-entity id="noAnsCube"
                   class="intersectable"
                   mixin="green cube"
                   sound__1="on: click; src: #blip1;"
@@ -141,59 +141,85 @@
           })
         }
 
-        // testing mouseenter and mouseleave
+        // 「はい」を選択したときのイベント
         var yesAnsCube = document.querySelector('#yesAnsCube');
-        yesAnsCube.addEventListener('mouseenter', function (evt) {
-          yesAnsCube.setAttribute('mixin','cube cube-hovered')
-        })
-        yesAnsCube.addEventListener('mouseleave', function (evt) {
-          yesAnsCube.setAttribute('mixin','green cube')
-        })
-        yesAnsCube.addEventListener('mousedown', function (evt) {
-          yesAnsCube.setAttribute('mixin','cube cube-selected')
-        })
-        yesAnsCube.addEventListener('mouseup', function (evt) {
-          yesAnsCube.setAttribute('mixin','cube cube-hovered')
-        })
         yesAnsCube.addEventListener('click', function (evt) {
-          var scene = document.querySelector('a-scene');
-          var clickRing = document.createElement('a-entity');
-          clickRing.id = 'clickRing-'+new Date().getTime();
-          clickRing.setAttribute('material','color: magenta; transparent: true; opacity: 0.6');
-          clickRing.setAttribute('geometry','primitive: ring; radius-inner: 0.5; radius-outer: 0.6');
-          clickRing.setAttribute('position',evt.detail.intersection.point);
-          var opacityAnimation = document.createElement('a-animation');
-          opacityAnimation.setAttribute('attribute','material.opacity');
-          opacityAnimation.setAttribute('to',0);
-          opacityAnimation.setAttribute('duration','250');
-          opacityAnimation.setAttribute('easing','ease-out-quad');
-          var scaleAnimation = document.createElement('a-animation');
-          scaleAnimation.setAttribute('attribute','scale');
-          scaleAnimation.setAttribute('to','3 3 3');
-          scaleAnimation.setAttribute('duration','250');
-          scaleAnimation.setAttribute('easing','ease-out-quad');
-          var onAnimationEnd = function () {
-            scene.removeChild(document.querySelector('#'+clickRing.id))
-          }
-          scaleAnimation.addEventListener('animationend', onAnimationEnd.bind(this))
-          clickRing.appendChild(opacityAnimation);
-          clickRing.appendChild(scaleAnimation);
-          scene.appendChild(clickRing);
 
           var element = document.getElementById("kusatsu-sky");
           var src = element.getAttribute("src");
 
-//          if(element.src == "#kusatsu0";){
+          var qtext1element = document.getElementById("qtext1");
+          var qtext2element = document.getElementById("qtext2");
 
-//          }
-          element.setAttribute('src', '#kusatsu_goal')
+          var qtext1;
+          var qtext2;
+          var sky;
 
-      //if(aaa == "#kusatsu1"){
-      //  var e = document.getElementById('aaa');
-      //  e.setAttribute('data-src', '#kusatsu_goal')
-      //}
+          if(src == "#kusatsu0"){
+            sky = '#kusatsu1';
+            qtext1 = "あいうえお";
+            qtext2 = "かきくけこ";
 
+          }else if(src == "#kusatsu1" ){
+            sky = '#kusatsu2';
+            qtext1 = "さしすせそ";
+            qtext2 = "たちつてと";
 
+          }else if(src == "#kusatsu2" ){
+            sky = '#kusatsu3';
+            qtext1 = "なにぬねの";
+            qtext2 = "はひふへほ";
+
+          }else{
+            sky = '#kusatsu_goal';
+            qtext1 = "まみむめも";
+            qtext2 = "やゆよ";
+          }
+
+          element.setAttribute('src', sky);
+          qtext1element.setAttribute('text','text:' + qtext1 + '; font: 07YasashisaGothic; size: 0.2;');
+          qtext2element.setAttribute('text','text:' + qtext2 + '; font: 07YasashisaGothic; size: 0.2;');
+
+        })
+
+        // 「いいえ」を選択したときのイベント
+        var noAnsCube = document.querySelector('#noAnsCube');
+        noAnsCube.addEventListener('click', function (evt) {
+
+          var element = document.getElementById("kusatsu-sky");
+          var src = element.getAttribute("src");
+
+          var qtext1element = document.getElementById("qtext1");
+          var qtext2element = document.getElementById("qtext2");
+
+          var qtext1;
+          var qtext2;
+          var sky;
+
+          if(src == "#kusatsu0"){
+            sky = '#kusatsu1';
+            qtext1 = "あいうえお";
+            qtext2 = "かきくけこ";
+
+          }else if(src == "#kusatsu1" ){
+            sky = '#kusatsu2';
+            qtext1 = "さしすせそ";
+            qtext2 = "たちつてと";
+
+          }else if(src == "#kusatsu2" ){
+            sky = '#kusatsu3';
+            qtext1 = "なにぬねの";
+            qtext2 = "はひふへほ";
+
+          }else{
+            sky = '#kusatsu_goal';
+            qtext1 = "まみむめも";
+            qtext2 = "やゆよ";
+          }
+
+          element.setAttribute('src', sky);
+          qtext1element.setAttribute('text','text:' + qtext1 + '; font: 07YasashisaGothic; size: 0.2;');
+          qtext2element.setAttribute('text','text:' + qtext2 + '; font: 07YasashisaGothic; size: 0.2;');
 
         })
       })();
