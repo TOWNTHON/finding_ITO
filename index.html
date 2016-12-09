@@ -57,7 +57,7 @@
       </a-entity>
 
       <!-- 質問　-->
-      <a-entity position="-3 4 0">
+      <a-entity position="-2 3 0">
         <a-entity id="qtext1" position="0 0.4 0" mixin="font" text="text: くさつおんせんについたブー。; font: 07YasashisaGothic; size: 0.2;"></a-entity>
         <a-entity id="qtext2" position="0 0 0" mixin="font" text="text: さっそくかんこうする？; font: 07YasashisaGothic; size: 0.2;"></a-entity>
 
@@ -156,24 +156,29 @@
           var sky;
 
           if(src == "#kusatsu0"){
+            sky = '#kusatsu5';
+            qtext1 = "ゆばたけまえのひろばについたブー";
+            qtext2 = "ゆばたけいく？";
+
+          }else if(src == "#kusatsu5" ){
+            sky = '#kusatsu3';
+            qtext1 = "おゆがきれいだブー";
+            qtext2 = "もうすこしみる？";
+
+          }else if(src == "#kusatsu3" ){
             sky = '#kusatsu1';
-            qtext1 = "あいうえお";
-            qtext2 = "かきくけこ";
+            qtext1 = "いしゅうしたブー";
+            qtext2 = "つぎはじんじゃいく？";
 
           }else if(src == "#kusatsu1" ){
-            sky = '#kusatsu2';
-            qtext1 = "さしすせそ";
-            qtext2 = "たちつてと";
-
-          }else if(src == "#kusatsu2" ){
-            sky = '#kusatsu3';
-            qtext1 = "なにぬねの";
-            qtext2 = "はひふへほ";
+            sky = '#kusatsu6';
+            qtext1 = "かみさまにおねがいしたブー";
+            qtext2 = "そろそろやどにいこうか？";
 
           }else{
             sky = '#kusatsu_goal';
-            qtext1 = "まみむめも";
-            qtext2 = "やゆよ";
+            qtext1 = "ついたブー";
+            qtext2 = "おんせんはいろう";
           }
 
           element.setAttribute('src', sky);
@@ -202,12 +207,17 @@
             qtext2 = "かきくけこ";
 
           }else if(src == "#kusatsu1" ){
-            sky = '#kusatsu2';
+            sky = '#kusatsu3';
             qtext1 = "さしすせそ";
             qtext2 = "たちつてと";
 
-          }else if(src == "#kusatsu2" ){
-            sky = '#kusatsu3';
+          }else if(src == "#kusatsu3" ){
+            sky = '#kusatsu4';
+            qtext1 = "なにぬねの";
+            qtext2 = "はひふへほ";
+
+          }else if(src == "#kusatsu4" ){
+            sky = '#kusatsu5';
             qtext1 = "なにぬねの";
             qtext2 = "はひふへほ";
 
