@@ -58,7 +58,7 @@
       <!-- 質問　-->
       <a-entity position="-2 3 0">
         <a-entity id="qtext1" position="0 0.4 0" mixin="font" text="text: くさつおんせんについたブー。; font: 07YasashisaGothic; size: 0.2;"></a-entity>
-        <a-entity id="qtext2" position="0 0 0" mixin="font" text="text: さっそくかんこうする？; font: 07YasashisaGothic; size: 0.2;"></a-entity>
+        <a-entity id="qtext2" position="0 0 0" mixin="font" text="text: まずはかんこうする？; font: 07YasashisaGothic; size: 0.2;"></a-entity>
 
         <a-entity id="invisibleCube"
                   mixin="cube"
@@ -72,7 +72,7 @@
 
       <!-- 「はい」回答ボックス　-->
       <a-entity position="-1 1 0">
-        <a-entity mixin="font" position="-0.1 0 1" text="text: はい; font: 07YasashisaGothic; size: 0.18"></a-entity>
+        <a-entity id="ytext" mixin="font" position="-0.1 0 1" text="text: そうだね; font: 07YasashisaGothic; size: 0.18"></a-entity>
         <a-entity id="yesAnsCube"
                   class="intersectable"
                   mixin="green cube"
@@ -86,7 +86,7 @@
 
       <!-- 「いいえ」回答ボックス　-->
       <a-entity position="1.5 1 0">
-        <a-entity mixin="font" position="-0.6 0 1" text="text: いいえ; font: 07YasashisaGothic; size: 0.18"></a-entity>
+        <a-entity id="ntext" mixin="font" position="-0.6 0 1" text="text: やめとく; font: 07YasashisaGothic; size: 0.18"></a-entity>
         <a-entity id="noAnsCube"
                   class="intersectable"
                   mixin="green cube"
@@ -96,21 +96,6 @@
                        easing="linear" dur="2000" fill="backwards"></a-animation>
         </a-entity>
       </a-entity>
-
-
-
-
-    	<!-- 3Dモデル 4 -->
-<!--
-    	<a-entity obj-model="obj: #cow-obj; mtl: #cow-mtl" position="-3 -0.5 0" rotation="0 270 0">
-    		<a-animation begin="click"
-    					 attribute="rotation"
-    					 dur="5000"
-    					 to="0 630 0"
-    					 easing="ease-in-out-back"></a-animation>
-    	</a-entity>
--->
-
     </a-scene>
 
     <script>
@@ -153,31 +138,43 @@
           var qtext1;
           var qtext2;
           var sky;
+          var ytext;
+          var ntext;
 
           if(src == "#kusatsu0"){
             sky = '#kusatsu5';
-            qtext1 = "ゆばたけまえのひろばについたブー";
-            qtext2 = "ゆばたけいく？";
+            qtext1 = "ゆばたけまえのひろばについたブ";
+            qtext2 = "くさつははじめて？";
+            ytext = "そうだよ";
+            ntext = "ちがうよ";
 
           }else if(src == "#kusatsu5" ){
             sky = '#kusatsu3';
-            qtext1 = "おゆがきれいだブー";
-            qtext2 = "もうすこしみる？";
+            qtext1 = "ゆたきはすごいはくりょくだブ！";
+            qtext2 = "つぎはじんじゃにいく？";
+            ytext = "うん";
+            ntext = "もういいや";
 
           }else if(src == "#kusatsu3" ){
             sky = '#kusatsu1';
             qtext1 = "いしゅうしたブー";
             qtext2 = "つぎはじんじゃいく？";
+            ytext = "うん";
+            ntext = "いいえ";
 
           }else if(src == "#kusatsu1" ){
             sky = '#kusatsu6';
             qtext1 = "かみさまにおねがいしたブー";
             qtext2 = "そろそろやどにいこうか？";
+            ytext = "うん";
+            ntext = "いいえ";
 
           }else{
             sky = '#kusatsu_goal';
             qtext1 = "ついたブー";
             qtext2 = "おんせんはいろう";
+            ytext = "うん";
+            ntext = "いいえ";
           }
 
           element.setAttribute('src', sky);
@@ -199,31 +196,43 @@
           var qtext1;
           var qtext2;
           var sky;
+          var ytext;
+          var ntext;
 
           if(src == "#kusatsu0"){
             sky = '#kusatsu1';
             qtext1 = "あいうえお";
             qtext2 = "かきくけこ";
+            ytext = "うん";
+            ntext = "いいえ";
 
           }else if(src == "#kusatsu1" ){
             sky = '#kusatsu3';
             qtext1 = "さしすせそ";
             qtext2 = "たちつてと";
+            ytext = "うん";
+            ntext = "いいえ";
 
           }else if(src == "#kusatsu3" ){
             sky = '#kusatsu4';
             qtext1 = "なにぬねの";
             qtext2 = "はひふへほ";
+            ytext = "うん";
+            ntext = "いいえ";
 
           }else if(src == "#kusatsu4" ){
             sky = '#kusatsu5';
             qtext1 = "なにぬねの";
             qtext2 = "はひふへほ";
+            ytext = "うん";
+            ntext = "いいえ";
 
           }else{
             sky = '#kusatsu_goal';
             qtext1 = "まみむめも";
             qtext2 = "やゆよ";
+            ytext = "うん";
+            ntext = "いいえ";
           }
 
           element.setAttribute('src', sky);
