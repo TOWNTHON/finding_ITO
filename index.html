@@ -2,99 +2,236 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>ファインディング・イト</title>
-    <meta name="description" content="Hello, World! - A-Frame">
-    <script src="https://rawgit.com/aframevr/aframe/917c06889ee1f3f79b7b1bbd9eab9815f9512503/dist/aframe.min.js"></script>
-    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-template-component@3.0.1"></script>
-    <script src="set-image.js"></script>
-    <script src="update-raycaster.js"></script>
+    <title>ジョブーブの草津旅行</title>
+    <meta name="description" content="ジョブーブの草津旅行">
+    <script src="dist/aframe.min.js"></script>
+    <script src="dist/aframe-text-component.min.js"></script>
+    <script src="font/myfont.typeface.js"></script>
   </head>
   <body>
     <a-scene>
       <a-assets>
-        <img id="kusatsu1" crossorigin="anonymous" src="images/kusatsu_1.jpg">
-        <img id="kusatsu2" crossorigin="anonymous" src="images/kusatsu_2.jpg">
-        <img id="kusatsu3" crossorigin="anonymous" src="images/kusatsu_3.jpg">
-        <img id="kusatsu4" crossorigin="anonymous" src="images/kusatsu_4.jpg">
-        <img id="kusatsu5" crossorigin="anonymous" src="images/kusatsu_5.jpg">
-        <img id="kusatsu6" crossorigin="anonymous" src="images/kusatsu_6.jpg">
+        <img id="kusatsu0" crossorigin="anonymous" src="images/kusatsu_retake_00.jpg">
+        <img id="kusatsu1" crossorigin="anonymous" src="images/kusatsu_retake_01.jpg">
+        <img id="kusatsu3" crossorigin="anonymous" src="images/kusatsu_retake_03.jpg">
+        <img id="kusatsu4" crossorigin="anonymous" src="images/kusatsu_retake_04.jpg">
+        <img id="kusatsu5" crossorigin="anonymous" src="images/kusatsu_retake_05.jpg">
+        <img id="kusatsu6" crossorigin="anonymous" src="images/kusatsu_retake_06.jpg">
         <img id="kusatsu_goal" crossorigin="anonymous" src="images/kusatsu_goal.jpg">
         <!--質問-->
         <img id="message" crossorigin="anonymous" src="images/question1.jpg" height="150" width="300">
         <img id="answer1y" crossorigin="anonymous" src="images/answer1y.jpg" height="150" width="300">
         <img id="answer1n" crossorigin="anonymous" src="images/answer1n.jpg" height="150" width="300">
         <!--ジョブーブの3D画像-->
-        <a-asset-item id="joboob-obj" src="obj/joboob3d.obj"></a-asset-item>
-        <a-asset-item id="joboob-mtl" src="obj/joboob3d.mtl"></a-asset-item>
+        <a-asset-item id="cow-obj" src="obj/joboob3d.obj"></a-asset-item>
+        <a-asset-item id="cow-mtl" src="obj/joboob3d.mtl"></a-asset-item>
 
-        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
 
-        <!-- Image link template to be reused. -->
-        <script id="link" type="text/nunjucks">
-          <a-plane class="link" height="1" width="1"
-            material="shader: flat; src: {{ thumb }}"
-            event-set__1="_event: mousedown; scale: 1 1 1"
-            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
-            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
-            event-set__4="_event: mouseleave; scale: 1 1 1"
-            set-image="on: click; target: #kusatsu-sky; src: {{ src }}"
-            sound="on: click; src: #click-sound"
-            update-raycaster="#cursor"></a-plane>
-        </script>
+        <audio id="blip1" src="blip1.wav"></audio>
+        <audio id="blip2" src="blip2.wav"></audio>
+        <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+        <a-mixin id="cube-hovered" material="color: #CC435F"></a-mixin>
+        <a-mixin id="cube-selected" material="color: #876A96"></a-mixin>
+        <a-mixin id="red" material="color: #F35F5F"></a-mixin>
+        <a-mixin id="green" material="color: #9DE0AD; opacity: 0.5; transparent: true"></a-mixin>
+        <a-mixin id="blue" material="color: #36A3EB"></a-mixin>
+        <a-mixin id="yellow" material="color: #F1EA65"></a-mixin>
+        <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+
+        <a-mixin id="font" text="font: 07YasashisaGothic"></a-mixin>
+
       </a-assets>
 
-      <a-sky id="kusatsu-sky" src="#kusatsu5"></a-sky>
+      <a-sky id="kusatsu-sky" src="#kusatsu0"></a-sky>
 
-      <!-- Image links. -->
-      <a-entity id="link" layout="type: line; margin: 1.5" position="0 -1 -4">
-        <a-entity template="src: #link"  data-src="#kusatsu1" data-thumb="#answer1y"></a-entity>
-        <a-entity template="src: #link"  data-src="#kusatsu6" data-thumb="#answer1n"></a-entity>
-        <a-entity template="src: #link" obj-model="obj: #joboob-obj; mtl: #joboob-mtl" position="150 0 0" rotation="0 135 0" opacity="0 0 0" scale="1 1 1"></a-entity>
+      <a-entity position="0 .6 4">
+        <a-camera>
+          <a-entity raycaster="far: 30; objects: .intersectable"
+                    cursor
+                    geometry="primitive: ring; radiusOuter: 0.015;
+                              radiusInner: 0.01; segmentsTheta: 32"
+                    material="color: #283644; shader: flat"
+                    position="0 0 -0.75"></a-entity>
+        </a-camera>
       </a-entity>
 
-      <!-- Camera + cursor. -->
-      <a-entity camera look-controls>
-        <a-cursor id="cursor"
-          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
-          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
-          event-set__1="_event: mouseenter; color: springgreen"
-          event-set__2="_event: mouseleave; color: black"
-          raycaster="objects: .link"></a-cursor>
-        <a-animation
-          begin="click"
-          attribute="rotation"
-          dur="5000"
-          to="0 180 0">
-        </a-animation>
+      <!-- 質問　-->
+      <a-entity position="-2 3 0">
+        <a-entity id="qtext1" position="0 0.4 0" mixin="font" text="text: くさつおんせんについたブー。; font: 07YasashisaGothic; size: 0.2;"></a-entity>
+        <a-entity id="qtext2" position="0 0 0" mixin="font" text="text: さっそくかんこうする？; font: 07YasashisaGothic; size: 0.2;"></a-entity>
+
+        <a-entity id="invisibleCube"
+                  mixin="cube"
+                  material="color: grey; opacity: 0.8; transparent: true"
+                  position="1.8 0.42 0"
+                  scale="4.2 1 0.05">
+        </a-entity>
+
       </a-entity>
-        <!-- カメラ -->
-      <a-camera>
-    <!-- カーソル -->
-    <a-entity cursor="fuse: true; fuseTimeout: 1000">
-      <!-- リング -->
-      <a-ring
-        color="#e74c3c"
-        radius-inner="0.01"
-        radius-outer="0.015"
-        position="0 0 -0.75">
-      </a-ring>
-    </a-entity>
-      </a-camera>
+
+
+      <!-- 「はい」回答ボックス　-->
+      <a-entity position="-1 1 0">
+        <a-entity mixin="font" position="-0.1 0 1" text="text: はい; font: 07YasashisaGothic; size: 0.18"></a-entity>
+        <a-entity id="yesAnsCube"
+                  class="intersectable"
+                  mixin="green cube"
+                  sound__1="on: click; src: #blip1;"
+                  sound__2="on: mouseenter; src: #blip2;">
+          <a-animation begin="click" attribute="rotation" to="0 360 0"
+                       easing="linear" dur="2000" fill="backwards"></a-animation>
+        </a-entity>
+      </a-entity>
+
+
+      <!-- 「いいえ」回答ボックス　-->
+      <a-entity position="1.5 1 0">
+        <a-entity mixin="font" position="-0.6 0 1" text="text: いいえ; font: 07YasashisaGothic; size: 0.18"></a-entity>
+        <a-entity id="noAnsCube"
+                  class="intersectable"
+                  mixin="green cube"
+                  sound__1="on: click; src: #blip1;"
+                  sound__2="on: mouseenter; src: #blip2;">
+          <a-animation begin="click" attribute="rotation" to="0 360 0"
+                       easing="linear" dur="2000" fill="backwards"></a-animation>
+        </a-entity>
+      </a-entity>
+
+
+
+
+    	<!-- 3Dモデル 4 -->
+<!--
+    	<a-entity obj-model="obj: #cow-obj; mtl: #cow-mtl" position="-3 -0.5 0" rotation="0 270 0">
+    		<a-animation begin="click"
+    					 attribute="rotation"
+    					 dur="5000"
+    					 to="0 630 0"
+    					 easing="ease-in-out-back"></a-animation>
+    	</a-entity>
+-->
+
     </a-scene>
-    <script>
-      var joboob3dEl = document.queryselector('#joboob-obj').object3D;
-      console.log(joboob3dEl.parent);
-      console.log(joboob3dEl.children);
-    </script>
 
     <script>
-      function goBack() {
-        var skyEl = document.getElementById("kusatsu-sky");
-        skyEl.src = "images/kusatsu_5.jpg";
-      }
+      (function () {
+        // Custom states.
+        var clickedEl = null;
+        var els = document.querySelectorAll('a-entity');
+        Array.prototype.forEach.call(els, function (el) {
+          el.addEventListener('click', function () {
+            if (clickedEl && clickedEl !== el) {
+              clickedEl.removeState('selected');
+            }
+            if (!el.classList.contains('clickable')) { return; }
+            clickedEl = el;
+            clickedEl.addState('selected');
+          });
+        });
+
+        // Responding to mouse events.
+        var cubes = document.querySelectorAll('a-entity[mixin*=cube]');
+        var i;
+        for (i = 0; i < cubes.length; ++i) {
+          cubes[i].addEventListener('click', function () {
+            var href = this.getAttribute('href');
+            if (!href) { return; }
+            window.top.postMessage({type: 'navigate', data: {url: href}}, '*');
+          })
+        }
+
+        // 「はい」を選択したときのイベント
+        var yesAnsCube = document.querySelector('#yesAnsCube');
+        yesAnsCube.addEventListener('click', function (evt) {
+
+          var element = document.getElementById("kusatsu-sky");
+          var src = element.getAttribute("src");
+
+          var qtext1element = document.getElementById("qtext1");
+          var qtext2element = document.getElementById("qtext2");
+
+          var qtext1;
+          var qtext2;
+          var sky;
+
+          if(src == "#kusatsu0"){
+            sky = '#kusatsu5';
+            qtext1 = "ゆばたけまえのひろばについたブー";
+            qtext2 = "ゆばたけいく？";
+
+          }else if(src == "#kusatsu5" ){
+            sky = '#kusatsu3';
+            qtext1 = "おゆがきれいだブー";
+            qtext2 = "もうすこしみる？";
+
+          }else if(src == "#kusatsu3" ){
+            sky = '#kusatsu1';
+            qtext1 = "いしゅうしたブー";
+            qtext2 = "つぎはじんじゃいく？";
+
+          }else if(src == "#kusatsu1" ){
+            sky = '#kusatsu6';
+            qtext1 = "かみさまにおねがいしたブー";
+            qtext2 = "そろそろやどにいこうか？";
+
+          }else{
+            sky = '#kusatsu_goal';
+            qtext1 = "ついたブー";
+            qtext2 = "おんせんはいろう";
+          }
+
+          element.setAttribute('src', sky);
+          qtext1element.setAttribute('text','text:' + qtext1 + '; font: 07YasashisaGothic; size: 0.2;');
+          qtext2element.setAttribute('text','text:' + qtext2 + '; font: 07YasashisaGothic; size: 0.2;');
+
+        })
+
+        // 「いいえ」を選択したときのイベント
+        var noAnsCube = document.querySelector('#noAnsCube');
+        noAnsCube.addEventListener('click', function (evt) {
+
+          var element = document.getElementById("kusatsu-sky");
+          var src = element.getAttribute("src");
+
+          var qtext1element = document.getElementById("qtext1");
+          var qtext2element = document.getElementById("qtext2");
+
+          var qtext1;
+          var qtext2;
+          var sky;
+
+          if(src == "#kusatsu0"){
+            sky = '#kusatsu1';
+            qtext1 = "あいうえお";
+            qtext2 = "かきくけこ";
+
+          }else if(src == "#kusatsu1" ){
+            sky = '#kusatsu3';
+            qtext1 = "さしすせそ";
+            qtext2 = "たちつてと";
+
+          }else if(src == "#kusatsu3" ){
+            sky = '#kusatsu4';
+            qtext1 = "なにぬねの";
+            qtext2 = "はひふへほ";
+
+          }else if(src == "#kusatsu4" ){
+            sky = '#kusatsu5';
+            qtext1 = "なにぬねの";
+            qtext2 = "はひふへほ";
+
+          }else{
+            sky = '#kusatsu_goal';
+            qtext1 = "まみむめも";
+            qtext2 = "やゆよ";
+          }
+
+          element.setAttribute('src', sky);
+          qtext1element.setAttribute('text','text:' + qtext1 + '; font: 07YasashisaGothic; size: 0.2;');
+          qtext2element.setAttribute('text','text:' + qtext2 + '; font: 07YasashisaGothic; size: 0.2;');
+
+        })
+      })();
     </script>
   </body>
 </html>
